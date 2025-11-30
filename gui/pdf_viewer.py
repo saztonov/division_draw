@@ -266,6 +266,19 @@ class PDFViewer(QGraphicsView):
             if hasattr(main_window, 'update_mask_info'):
                 main_window.update_mask_info(None)
     
+    def clear_all_masks(self):
+        """Очистка всех масок"""
+        for mask in self.masks:
+            self.scene.removeItem(mask)
+        
+        self.masks.clear()
+        self.selected_mask = None
+        
+        # Обновляем информацию
+        main_window = self.window()
+        if hasattr(main_window, 'update_mask_info'):
+            main_window.update_mask_info(None)
+    
     def mouseReleaseEvent(self, event):
         """Обработка отпускания кнопки мыши"""
         super().mouseReleaseEvent(event)
